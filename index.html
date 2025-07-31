@@ -376,6 +376,11 @@
             <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-4">مجيد | iTrx</div>
                 <p class="text-gray-400 mb-8">مصمم جرافيكي محترف - أحول أفكارك إلى تصاميم مبدعة</p>
+                <div class="mb-6">
+                    <button onclick="showLoginModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-semibold transition duration-300 shadow-lg">
+                        🔐 تسجيل الدخول للإدارة
+                    </button>
+                </div>
                 <div class="border-t border-gray-800 pt-8">
                     <p class="text-gray-400">&copy; 2025 صُنع من خَط ستديو</p>
                 </div>
@@ -383,7 +388,508 @@
         </div>
     </footer>
 
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900">تسجيل الدخول للإدارة</h2>
+                <p class="text-gray-600 mt-2">أدخل بيانات الدخول للوصول للوحة التحكم</p>
+            </div>
+            
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
+                    <input type="text" id="username" name="username" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
+                           placeholder="أدخل اسم المستخدم">
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
+                           placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <div id="login-error" class="hidden text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg"></div>
+                
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 shadow-lg">
+                        دخول
+                    </button>
+                    <button type="button" onclick="hideLoginModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="fixed inset-0 bg-gray-100 z-50 hidden overflow-y-auto">
+        <!-- Dashboard Header -->
+        <header class="bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-primary">لوحة التحكم | iTrx</div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-700">مرحباً، <span id="current-user">iTrx7</span></span>
+                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition duration-300">
+                            تسجيل الخروج
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Dashboard Navigation -->
+            <div class="bg-white rounded-2xl shadow-lg mb-8">
+                <div class="p-6">
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="showDashboardSection('orders')" class="dashboard-nav-btn bg-primary text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            📋 الطلبات
+                        </button>
+                        <button onclick="showDashboardSection('portfolio')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            🎨 إدارة الأعمال
+                        </button>
+                        <button onclick="showDashboardSection('users')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            👥 إدارة المستخدمين
+                        </button>
+                        <button onclick="showDashboardSection('analytics')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            📊 التحليلات
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="orders-section" class="dashboard-section">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">إدارة الطلبات</h2>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">العميل</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الموضوع</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">أحمد محمد</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ahmed@example.com</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">تصميم هوية بصرية</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">قيد المراجعة</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-15</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-primary hover:text-primary-dark ml-2">عرض</button>
+                                        <button class="text-green-600 hover:text-green-900 ml-2">قبول</button>
+                                        <button class="text-red-600 hover:text-red-900">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">سارة علي</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">sara@example.com</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">تصميم موقع ويب</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">مكتمل</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-14</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-primary hover:text-primary-dark ml-2">عرض</button>
+                                        <button class="text-blue-600 hover:text-blue-900">تحديث</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Management Section -->
+            <div id="portfolio-section" class="dashboard-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة الأعمال</h2>
+                        <button onclick="showAddWorkModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            ➕ إضافة عمل جديد
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                        <div class="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
+                            <div class="text-center">
+                                <svg class="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                <p class="text-gray-500">انقر لإضافة عمل جديد</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management Section -->
+            <div id="users-section" class="dashboard-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة المستخدمين</h2>
+                        <button onclick="showAddUserModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            ➕ إضافة مستخدم جديد
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">اسم المستخدم</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الدور</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">تاريخ الإنشاء</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table" class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">iTrx7</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">مدير عام</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">نشط</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-01</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <span class="text-gray-400">المدير الأساسي</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics-section" class="dashboard-section hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100">
+                                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">إجمالي الطلبات</p>
+                                <p class="text-2xl font-semibold text-gray-900">24</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100">
+                                <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">مكتملة</p>
+                                <p class="text-2xl font-semibold text-gray-900">18</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100">
+                                <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">قيد المراجعة</p>
+                                <p class="text-2xl font-semibold text-gray-900">4</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-red-100">
+                                <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">مرفوضة</p>
+                                <p class="text-2xl font-semibold text-gray-900">2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">إضافة مستخدم جديد</h2>
+            
+            <form id="add-user-form" class="space-y-6">
+                <div>
+                    <label for="new-username" class="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
+                    <input type="text" id="new-username" name="new-username" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                </div>
+                
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                    <input type="password" id="new-password" name="new-password" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                </div>
+                
+                <div>
+                    <label for="user-role" class="block text-sm font-medium text-gray-700 mb-2">الدور</label>
+                    <select id="user-role" name="user-role" required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                        <option value="">اختر الدور</option>
+                        <option value="admin">إداري</option>
+                        <option value="manager">مدير</option>
+                        <option value="marketing">مسؤول التسويق</option>
+                        <option value="support">مسؤول الدعم الفني</option>
+                    </select>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 shadow-lg">
+                        إضافة المستخدم
+                    </button>
+                    <button type="button" onclick="hideAddUserModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
     <script>
+        // User credentials and roles
+        const users = {
+            'iTrx7': {
+                password: 'iTrx1948@',
+                role: 'super_admin',
+                permissions: ['orders', 'portfolio', 'users', 'analytics']
+            }
+        };
+
+        const rolePermissions = {
+            'super_admin': ['orders', 'portfolio', 'users', 'analytics'],
+            'admin': ['orders', 'portfolio', 'analytics'],
+            'manager': ['orders', 'portfolio'],
+            'marketing': ['orders', 'analytics'],
+            'support': ['orders']
+        };
+
+        let currentUser = null;
+        let currentUserRole = null;
+
+        // Login Modal Functions
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function hideLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('login-form').reset();
+        }
+
+        // Dashboard Functions
+        function showDashboard() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            showDashboardSection('orders');
+        }
+
+        function hideDashboard() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function logout() {
+            currentUser = null;
+            currentUserRole = null;
+            hideDashboard();
+        }
+
+        function showDashboardSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(section + '-section').classList.remove('hidden');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.dashboard-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-primary', 'text-white');
+        }
+
+        // User Management Functions
+        function showAddUserModal() {
+            document.getElementById('add-user-modal').classList.remove('hidden');
+        }
+
+        function hideAddUserModal() {
+            document.getElementById('add-user-modal').classList.add('hidden');
+            document.getElementById('add-user-form').reset();
+        }
+
+        function addNewUser(username, password, role) {
+            const userRow = document.createElement('tr');
+            const roleLabels = {
+                'admin': 'إداري',
+                'manager': 'مدير', 
+                'marketing': 'مسؤول التسويق',
+                'support': 'مسؤول الدعم الفني'
+            };
+            
+            const roleColors = {
+                'admin': 'bg-blue-100 text-blue-800',
+                'manager': 'bg-green-100 text-green-800',
+                'marketing': 'bg-orange-100 text-orange-800',
+                'support': 'bg-indigo-100 text-indigo-800'
+            };
+
+            userRow.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${username}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${roleColors[role]}">${roleLabels[role]}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">نشط</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date().toISOString().split('T')[0]}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <button class="text-red-600 hover:text-red-900" onclick="deleteUser('${username}')">حذف</button>
+                </td>
+            `;
+            
+            document.getElementById('users-table').appendChild(userRow);
+            
+            // Add user to users object
+            users[username] = {
+                password: password,
+                role: role,
+                permissions: rolePermissions[role]
+            };
+        }
+
+        function deleteUser(username) {
+            if (username === 'iTrx7') {
+                alert('لا يمكن حذف المدير الأساسي');
+                return;
+            }
+            
+            if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                delete users[username];
+                // Remove from table
+                const rows = document.querySelectorAll('#users-table tr');
+                rows.forEach(row => {
+                    if (row.cells[0] && row.cells[0].textContent === username) {
+                        row.remove();
+                    }
+                });
+            }
+        }
+
+        // Event Listeners
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('login-error');
+            
+            if (users[username] && users[username].password === password) {
+                currentUser = username;
+                currentUserRole = users[username].role;
+                document.getElementById('current-user').textContent = username;
+                
+                hideLoginModal();
+                showDashboard();
+                
+                // Hide sections based on permissions
+                const userPermissions = users[username].permissions;
+                document.querySelectorAll('.dashboard-nav-btn').forEach(btn => {
+                    const section = btn.onclick.toString().match(/'(\w+)'/)[1];
+                    if (!userPermissions.includes(section)) {
+                        btn.style.display = 'none';
+                    }
+                });
+                
+            } else {
+                errorDiv.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+                errorDiv.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('add-user-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('new-username').value;
+            const password = document.getElementById('new-password').value;
+            const role = document.getElementById('user-role').value;
+            
+            if (users[username]) {
+                alert('اسم المستخدم موجود بالفعل');
+                return;
+            }
+            
+            addNewUser(username, password, role);
+            hideAddUserModal();
+            alert('تم إضافة المستخدم بنجاح');
+        });
+
+        // Close modals when clicking outside
+        document.getElementById('login-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLoginModal();
+            }
+        });
+
+        document.getElementById('add-user-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideAddUserModal();
+            }
+        });
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -482,5 +988,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967d248f7773f921',t:'MTc1Mzk2NTQwMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9680a71936c678a7',t:'MTc1NDAwMjIwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
