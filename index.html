@@ -813,8 +813,8 @@
     </div>
 
     <script>
-        // System Data
-        let users = {
+        // System Data with localStorage persistence
+        let users = JSON.parse(localStorage.getItem('itrx_users')) || {
             'iTrx7': {
                 password: 'iTrx1948@',
                 email: 'itrx70@gmail.com',
@@ -825,10 +825,17 @@
             }
         };
 
-        let orders = [];
-        let portfolioItems = [];
+        let orders = JSON.parse(localStorage.getItem('itrx_orders')) || [];
+        let portfolioItems = JSON.parse(localStorage.getItem('itrx_portfolio')) || [];
         let currentUser = null;
         let currentUserRole = null;
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('itrx_users', JSON.stringify(users));
+            localStorage.setItem('itrx_orders', JSON.stringify(orders));
+            localStorage.setItem('itrx_portfolio', JSON.stringify(portfolioItems));
+        }
 
         const roleHierarchy = {
             'super_admin': { rank: 'مدير عام', level: 1, color: 'bg-purple-100 text-purple-800' },
@@ -996,6 +1003,7 @@
 
         function updateOrderStatus(index, newStatus) {
             orders[index].status = newStatus;
+            saveData();
             loadOrders();
             updateAnalytics();
         }
@@ -1044,6 +1052,7 @@
         function deleteUser(username) {
             if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
                 delete users[username];
+                saveData();
                 loadUsers();
             }
         }
@@ -1098,6 +1107,7 @@
         function deletePortfolioItem(index) {
             if (confirm('هل أنت متأكد من حذف هذا العمل؟')) {
                 portfolioItems.splice(index, 1);
+                saveData();
                 loadPortfolio();
             }
         }
@@ -1214,6 +1224,7 @@
                 created: new Date().toISOString().split('T')[0]
             };
             
+            saveData();
             hideRegisterModal();
             alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول');
         });
@@ -1242,6 +1253,7 @@
             };
             
             orders.push(newOrder);
+            saveData();
             hideOrderModal();
             alert('تم إرسال طلبك بنجاح! سيتم مراجعته قريباً');
         });
@@ -1286,6 +1298,7 @@
                 created: new Date().toISOString().split('T')[0]
             };
             
+            saveData();
             loadUsers();
             hideAddUserModal();
             alert('تم إضافة المستخدم بنجاح');
@@ -1308,6 +1321,7 @@
             };
             
             portfolioItems.push(newWork);
+            saveData();
             loadPortfolio();
             hideAddWorkModal();
             alert('تم إضافة العمل بنجاح');
@@ -1357,5 +1371,5 @@
             updateAnalytics();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9680be9024d7b115',t:'MTc1NDAwMzE2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9680c7ee21c5f445',t:'MTc1NDAwMzU1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
