@@ -578,7 +578,15 @@
             <!-- Orders Section -->
             <div id="orders-section" class="dashboard-section">
                 <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">إدارة الطلبات</h2>
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة الطلبات</h2>
+                        <button onclick="generateOrdersFile()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                            تحميل ملف الطلبات
+                        </button>
+                    </div>
                     
                     <div class="overflow-x-auto">
                         <table class="w-full table-auto">
@@ -830,11 +838,60 @@
         let currentUser = null;
         let currentUserRole = null;
 
-        // Save data to localStorage
+        // Save data to localStorage and generate file
         function saveData() {
             localStorage.setItem('itrx_users', JSON.stringify(users));
             localStorage.setItem('itrx_orders', JSON.stringify(orders));
             localStorage.setItem('itrx_portfolio', JSON.stringify(portfolioItems));
+            
+            // Auto-generate and download iTrxOrders.txt file
+            generateOrdersFile();
+        }
+
+        // Generate and download iTrxOrders.txt file
+        function generateOrdersFile() {
+            if (orders.length === 0) return;
+            
+            let fileContent = "=== ملف طلبات iTrx - تم إنشاؤه تلقائياً ===\n";
+            fileContent += `تاريخ الإنشاء: ${new Date().toLocaleString('ar-SA')}\n`;
+            fileContent += `إجمالي الطلبات: ${orders.length}\n`;
+            fileContent += "=" + "=".repeat(50) + "\n\n";
+            
+            orders.forEach((order, index) => {
+                fileContent += `رقم الطلب: ${index + 1}\n`;
+                fileContent += `الاسم: ${order.clientName}\n`;
+                fileContent += `البريد الإلكتروني: ${order.clientEmail}\n`;
+                fileContent += `نوع الخدمة: ${order.service}\n`;
+                fileContent += `الميزانية: ${order.budget}\n`;
+                fileContent += `الحالة: ${order.status}\n`;
+                fileContent += `تاريخ الطلب: ${order.date}\n`;
+                fileContent += `تفاصيل الطلب:\n${order.description}\n`;
+                fileContent += "-".repeat(50) + "\n\n";
+            });
+            
+            // Add statistics
+            const completedCount = orders.filter(o => o.status === 'مكتمل').length;
+            const pendingCount = orders.filter(o => o.status === 'قيد المراجعة').length;
+            const acceptedCount = orders.filter(o => o.status === 'مقبول').length;
+            const rejectedCount = orders.filter(o => o.status === 'مرفوض').length;
+            
+            fileContent += "=== إحصائيات الطلبات ===\n";
+            fileContent += `الطلبات المكتملة: ${completedCount}\n`;
+            fileContent += `الطلبات المقبولة: ${acceptedCount}\n`;
+            fileContent += `الطلبات قيد المراجعة: ${pendingCount}\n`;
+            fileContent += `الطلبات المرفوضة: ${rejectedCount}\n`;
+            fileContent += "=" + "=".repeat(30) + "\n";
+            
+            // Create and download file
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'iTrxOrders.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
         }
 
         const roleHierarchy = {
@@ -1371,5 +1428,5 @@
             updateAnalytics();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9680c7ee21c5f445',t:'MTc1NDAwMzU1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9680cb0762c8f445',t:'MTc1NDAwMzY3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
