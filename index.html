@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجيد | iTrx - منصة التصميم الذكية</title>
+    <title>مجيد | iTrx - مصمم جرافيكي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,76 +43,11 @@
         .skill-bar {
             transition: width 2s ease-in-out;
         }
-        .animate-slide-left {
-            animation: slideLeft 3s ease-in-out infinite;
-        }
-        @keyframes slideLeft {
-            0% { transform: translateX(100%); opacity: 0; }
-            20% { transform: translateX(0); opacity: 1; }
-            80% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(-100%); opacity: 0; }
-        }
-        .chat-bubble {
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        .typing-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #999;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-        .typing-indicator:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-        .pulse-ring {
-            animation: pulse-ring 2s infinite;
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.3); opacity: 0; }
-        }
-        .invoice-page {
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        @media print {
-            .invoice-page {
-                box-shadow: none;
-                margin: 0;
-            }
-        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Live Stats Bar -->
-    <div class="bg-primary text-white py-2 text-center text-sm">
-        <div class="max-w-7xl mx-auto px-4 flex justify-center items-center gap-8">
-            <div class="flex items-center gap-2">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                <span>زوار الموقع: <span id="visitor-count">1,247</span></span>
-            </div>
-            <div class="flex items-center gap-2">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.01 2.01 0 0 0 18.05 7h-.72c-.8 0-1.54.5-1.85 1.26l-1.92 5.77c-.24.72.16 1.5.89 1.73.73.23 1.5-.16 1.73-.89L16.93 12H18v10h2z"/>
-                </svg>
-                <span>الحسابات المسجلة: <span id="registered-count">89</span></span>
-            </div>
-        </div>
-    </div>
-
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-8 z-50">
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -125,28 +60,12 @@
                         <a href="#services" class="text-gray-700 hover:text-primary transition duration-300">خدماتي</a>
                         <a href="#portfolio" class="text-gray-700 hover:text-primary transition duration-300">أعمالي</a>
                         <a href="#contact" class="text-gray-700 hover:text-primary transition duration-300">تواصل معي</a>
-                        <div id="auth-buttons">
-                            <button onclick="showLoginModal()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition duration-300 shadow-sm flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
-                                </svg>
-                                دخول
-                            </button>
-                        </div>
-                        <div id="user-menu" class="hidden relative">
-                            <button onclick="toggleUserMenu()" class="flex items-center gap-2 text-gray-700 hover:text-primary">
-                                <img id="nav-user-avatar" src="" class="w-8 h-8 rounded-full border-2 border-primary">
-                                <span id="nav-username"></span>
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M7 10l5 5 5-5z"/>
-                                </svg>
-                            </button>
-                            <div id="user-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border">
-                                <a href="#" onclick="showProfileModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">الملف الشخصي</a>
-                                <a href="#" onclick="showOrdersHistory()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">طلباتي</a>
-                                <a href="#" onclick="logout()" class="block px-4 py-2 text-red-600 hover:bg-red-50">تسجيل الخروج</a>
-                            </div>
-                        </div>
+                        <button onclick="showLoginModal()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition duration-300 shadow-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            </svg>
+                            دخول
+                        </button>
                     </div>
                 </div>
                 <div class="md:hidden">
@@ -158,127 +77,28 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-primary">الرئيسية</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-primary">نبذة عني</a>
+                <a href="#services" class="block px-3 py-2 text-gray-700 hover:text-primary">خدماتي</a>
+                <a href="#portfolio" class="block px-3 py-2 text-gray-700 hover:text-primary">أعمالي</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-primary">تواصل معي</a>
+                <div class="px-3 py-2">
+                    <button onclick="showLoginModal()" class="w-full bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition duration-300 shadow-sm flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                        </svg>
+                        دخول
+                    </button>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <!-- AI Chat Assistant -->
-    <div id="chat-assistant" class="fixed bottom-6 left-6 z-50">
-        <div id="chat-bubble" class="hidden mb-4 bg-white rounded-2xl shadow-2xl w-80 max-h-96 overflow-hidden">
-            <div class="bg-primary text-white p-4 rounded-t-2xl">
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-2">
-                        <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold">مساعد iTrx الذكي</h3>
-                            <p class="text-xs opacity-90">متاح الآن للمساعدة</p>
-                        </div>
-                    </div>
-                    <button onclick="toggleChat()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-1">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div id="chat-messages" class="h-64 overflow-y-auto p-4 space-y-3">
-                <div class="flex items-start gap-2">
-                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    <div class="bg-gray-100 rounded-2xl p-3 chat-bubble">
-                        <p class="text-sm">مرحباً! أنا مساعد iTrx الذكي 🤖<br>كيف يمكنني مساعدتك اليوم؟</p>
-                    </div>
-                </div>
-            </div>
-            <div class="p-4 border-t">
-                <div class="flex gap-2">
-                    <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا..." 
-                           class="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
-                           onkeypress="if(event.key==='Enter') sendMessage()">
-                    <button onclick="sendMessage()" class="bg-primary text-white p-2 rounded-full hover:bg-primary-dark transition duration-300">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <button onclick="toggleChat()" class="bg-primary text-white w-16 h-16 rounded-full shadow-2xl hover:bg-primary-dark transition duration-300 flex items-center justify-center relative">
-            <div class="absolute inset-0 bg-primary rounded-full pulse-ring"></div>
-            <svg class="w-8 h-8 relative z-10" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-            </svg>
-        </button>
-    </div>
-
-    <!-- Live Reviews Sidebar -->
-    <div id="reviews-sidebar" class="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 space-y-4">
-        <!-- Reviews will be populated here -->
-    </div>
-
-    <!-- Rating Request Notification -->
-    <div id="rating-notification" class="hidden fixed top-24 left-1/2 transform -translate-x-1/2 bg-white rounded-2xl shadow-2xl p-6 z-50 border-2 border-primary">
-        <div class="text-center">
-            <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-2">تم إكمال طلبك بنجاح! 🎉</h3>
-            <p class="text-gray-600 mb-4">نرجو تقييم تجربتك معنا</p>
-            
-            <div class="flex justify-center mb-4" id="rating-stars">
-                <button onclick="setRating(1)" class="text-gray-300 hover:text-yellow-400 text-2xl">⭐</button>
-                <button onclick="setRating(2)" class="text-gray-300 hover:text-yellow-400 text-2xl">⭐</button>
-                <button onclick="setRating(3)" class="text-gray-300 hover:text-yellow-400 text-2xl">⭐</button>
-                <button onclick="setRating(4)" class="text-gray-300 hover:text-yellow-400 text-2xl">⭐</button>
-                <button onclick="setRating(5)" class="text-gray-300 hover:text-yellow-400 text-2xl">⭐</button>
-            </div>
-            
-            <textarea id="rating-comment" placeholder="أضف تعليقك (اختياري)" 
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 resize-none" rows="3"></textarea>
-            
-            <div class="flex gap-3">
-                <button onclick="submitRating()" class="flex-1 bg-primary text-white py-2 px-4 rounded-lg font-semibold hover:bg-primary-dark transition duration-300">
-                    إرسال التقييم
-                </button>
-                <button onclick="closeRatingNotification()" class="flex-1 border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
-                    تخطي
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Designer of the Month -->
-    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white py-4">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex items-center justify-center gap-4">
-                <div class="flex items-center gap-2">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    <span class="font-bold">مصمم الشهر</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <img id="designer-of-month-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E" 
-                         class="w-10 h-10 rounded-full border-2 border-white">
-                    <div>
-                        <div class="font-bold" id="designer-of-month-name">iTrx7</div>
-                        <div class="text-sm opacity-90">⭐ 4.9 من 5</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-32">
+    <section id="home" class="gradient-bg min-h-screen flex items-center justify-center pt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="animate-float">
                 <div class="w-32 h-32 mx-auto mb-8 bg-white rounded-full flex items-center justify-center shadow-2xl">
@@ -288,25 +108,10 @@
                 </div>
             </div>
             <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">مجيد | iTrx</h1>
-            <p class="text-xl md:text-2xl text-white mb-8 opacity-90">منصة التصميم الذكية</p>
+            <p class="text-xl md:text-2xl text-white mb-8 opacity-90">مصمم جرافيكي محترف</p>
             <p class="text-lg text-white mb-12 max-w-2xl mx-auto opacity-80">
-                منصة متكاملة للتصميم الجرافيكي مع مساعد ذكي ونظام فواتير احترافي
+                أحول أفكارك إلى تصاميم مبدعة ومميزة تعكس هويتك البصرية بأسلوب احترافي وعصري
             </p>
-            
-            <!-- Pricing Alert -->
-            <div class="bg-white bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 mb-8 max-w-md mx-auto">
-                <div class="flex items-center justify-center gap-2 mb-2">
-                    <svg class="w-5 h-5 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                    </svg>
-                    <span class="font-semibold text-white">نظام التسعير</span>
-                </div>
-                <p class="text-white text-sm">
-                    الحد الأدنى: <span class="font-bold">50 ريال</span><br>
-                    يمكن أن تصل إلى <span class="font-bold">1000+ ريال</span> حسب التعقيد
-                </p>
-            </div>
-            
             <div class="space-y-4 sm:space-y-0 sm:space-x-reverse sm:space-x-4 sm:flex sm:justify-center">
                 <button onclick="scrollToSection('portfolio')" class="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">
                     شاهد أعمالي
@@ -404,7 +209,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">تصميم الهوية البصرية</h3>
                     <p class="text-gray-600 leading-relaxed">إنشاء هوية بصرية متكاملة تشمل الشعار والألوان والخطوط لتعكس شخصية علامتك التجارية</p>
-                    <div class="mt-4 text-primary font-semibold">من 200 ريال</div>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
@@ -414,7 +218,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">تصميم المطبوعات</h3>
                     <p class="text-gray-600 leading-relaxed">تصميم البروشورات والكتالوجات والبوسترات والكروت الشخصية بجودة عالية للطباعة</p>
-                    <div class="mt-4 text-primary font-semibold">من 100 ريال</div>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
@@ -424,7 +227,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">تصميم الويب</h3>
                     <p class="text-gray-600 leading-relaxed">تصميم واجهات مواقع الويب والتطبيقات بأسلوب عصري وتجربة مستخدم مميزة</p>
-                    <div class="mt-4 text-primary font-semibold">من 500 ريال</div>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
@@ -434,7 +236,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">التصميم الرقمي</h3>
                     <p class="text-gray-600 leading-relaxed">تصميم المحتوى الرقمي لوسائل التواصل الاجتماعي والإعلانات الإلكترونية</p>
-                    <div class="mt-4 text-primary font-semibold">من 50 ريال</div>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
@@ -444,7 +245,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">الاستشارات التصميمية</h3>
                     <p class="text-gray-600 leading-relaxed">تقديم الاستشارات المتخصصة في مجال التصميم والهوية البصرية للشركات</p>
-                    <div class="mt-4 text-primary font-semibold">من 150 ريال</div>
                 </div>
                 <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
                     <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-2xl flex items-center justify-center mb-6">
@@ -454,7 +254,6 @@
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">تطوير العلامة التجارية</h3>
                     <p class="text-gray-600 leading-relaxed">بناء وتطوير العلامة التجارية من الصفر مع استراتيجية بصرية شاملة</p>
-                    <div class="mt-4 text-primary font-semibold">من 800 ريال</div>
                 </div>
             </div>
         </div>
@@ -576,8 +375,7 @@
                                      class="w-20 h-20 rounded-full border-4 border-primary shadow-lg">
                             </div>
                             <h3 class="text-xl font-semibold text-gray-900 mb-2">مرحباً، <span id="profile-username"></span></h3>
-                            <p class="text-gray-600 mb-2"><span id="profile-rank"></span></p>
-                            <p class="text-sm text-gray-500 mb-4">ID: <span id="user-id" class="font-mono bg-gray-100 px-2 py-1 rounded"></span></p>
+                            <p class="text-gray-600 mb-4"><span id="profile-rank"></span></p>
                             
                             <div class="flex flex-col gap-3">
                                 <button onclick="showProfileModal()" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 flex items-center justify-center gap-2">
@@ -592,13 +390,6 @@
                                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                                     </svg>
                                     طلب تصميم جديد
-                                </button>
-                                
-                                <button onclick="showOrdersHistory()" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300 flex items-center justify-center gap-2">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
-                                    </svg>
-                                    طلباتي
                                 </button>
                                 
                                 <button onclick="logout()" class="border border-red-500 text-red-500 px-6 py-3 rounded-lg font-semibold hover:bg-red-50 transition duration-300 flex items-center justify-center gap-2">
@@ -620,15 +411,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <div class="text-3xl font-bold text-primary mb-4">مجيد | iTrx</div>
-                <p class="text-gray-400 mb-8">منصة التصميم الذكية - أحول أفكارك إلى تصاميم مبدعة</p>
+                <p class="text-gray-400 mb-8">مصمم جرافيكي محترف - أحول أفكارك إلى تصاميم مبدعة</p>
                 <div class="border-t border-gray-800 pt-8">
-                    <p class="text-gray-400">&copy; 2025 منصة iTrx للتصميم الذكي</p>
+                    <p class="text-gray-400">&copy; 2025 صُنع من خَط ستديو</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- All Modals will be included here -->
     <!-- Login Modal -->
     <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
@@ -739,12 +529,12 @@
                     <select id="order-service" name="order-service" required 
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
                         <option value="">اختر نوع الخدمة</option>
-                        <option value="هوية بصرية" data-price="200">تصميم الهوية البصرية (من 200 ريال)</option>
-                        <option value="مطبوعات" data-price="100">تصميم المطبوعات (من 100 ريال)</option>
-                        <option value="موقع ويب" data-price="500">تصميم الويب (من 500 ريال)</option>
-                        <option value="تصميم رقمي" data-price="50">التصميم الرقمي (من 50 ريال)</option>
-                        <option value="استشارات" data-price="150">الاستشارات التصميمية (من 150 ريال)</option>
-                        <option value="علامة تجارية" data-price="800">تطوير العلامة التجارية (من 800 ريال)</option>
+                        <option value="هوية بصرية">تصميم الهوية البصرية</option>
+                        <option value="مطبوعات">تصميم المطبوعات</option>
+                        <option value="موقع ويب">تصميم الويب</option>
+                        <option value="تصميم رقمي">التصميم الرقمي</option>
+                        <option value="استشارات">الاستشارات التصميمية</option>
+                        <option value="علامة تجارية">تطوير العلامة التجارية</option>
                     </select>
                 </div>
                 
@@ -760,11 +550,10 @@
                     <select id="order-budget" name="order-budget" required 
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
                         <option value="">اختر الميزانية</option>
-                        <option value="50-100">50 - 100 ريال</option>
-                        <option value="100-200">100 - 200 ريال</option>
-                        <option value="200-500">200 - 500 ريال</option>
                         <option value="500-1000">500 - 1000 ريال</option>
-                        <option value="1000+">أكثر من 1000 ريال</option>
+                        <option value="1000-2500">1000 - 2500 ريال</option>
+                        <option value="2500-5000">2500 - 5000 ريال</option>
+                        <option value="5000+">أكثر من 5000 ريال</option>
                     </select>
                 </div>
                 
@@ -782,115 +571,292 @@
         </div>
     </div>
 
-    <!-- Orders History Modal -->
-    <div id="orders-history-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl p-8 max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">طلباتي</h2>
-                <button onclick="hideOrdersHistory()" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="user-orders-list" class="space-y-4">
-                <!-- Orders will be populated here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Direct Communication Modal -->
-    <div id="communication-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-hidden">
-            <div class="bg-primary text-white p-4 rounded-t-2xl">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <h3 class="font-semibold">التواصل المباشر مع المصمم</h3>
-                        <p class="text-sm opacity-90">طلب رقم: <span id="comm-order-id"></span></p>
+    <!-- Dashboard -->
+    <div id="dashboard" class="fixed inset-0 bg-gray-100 z-50 hidden overflow-y-auto">
+        <!-- Dashboard Header -->
+        <header class="bg-white shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <div class="text-2xl font-bold text-primary">لوحة التحكم | iTrx</div>
                     </div>
-                    <button onclick="hideCommunicationModal()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-1">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div id="communication-messages" class="h-96 overflow-y-auto p-4 space-y-3">
-                <!-- Messages will be populated here -->
-            </div>
-            
-            <div class="p-4 border-t">
-                <div class="flex gap-2">
-                    <input type="text" id="communication-input" placeholder="اكتب رسالتك هنا..." 
-                           class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                           onkeypress="if(event.key==='Enter') sendCommunicationMessage()">
-                    <button onclick="sendCommunicationMessage()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition duration-300">
-                        إرسال
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Invoice Modal -->
-    <div id="invoice-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-900">فاتورة إلكترونية</h2>
-                    <div class="flex gap-2">
-                        <button onclick="printInvoice()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300">
-                            طباعة
+                    <div class="flex items-center gap-4">
+                        <span class="text-gray-700">مرحباً، <span id="current-user">iTrx7</span> <span id="current-user-rank" class="text-primary font-semibold"></span></span>
+                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition duration-300">
+                            تسجيل الخروج
                         </button>
-                        <button onclick="hideInvoiceModal()" class="text-gray-500 hover:text-gray-700">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Dashboard Navigation -->
+            <div class="bg-white rounded-2xl shadow-lg mb-8">
+                <div class="p-6">
+                    <div class="flex flex-wrap gap-4" id="dashboard-nav">
+                        <button onclick="showDashboardSection('orders')" class="dashboard-nav-btn bg-primary text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            📋 الطلبات
+                        </button>
+                        <button onclick="showDashboardSection('portfolio')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            🎨 إدارة الأعمال
+                        </button>
+                        <button onclick="showDashboardSection('users')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            👥 إدارة المستخدمين
+                        </button>
+                        <button onclick="showDashboardSection('analytics')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
+                            📊 التحليلات
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="orders-section" class="dashboard-section">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة الطلبات</h2>
+                        <button onclick="generateOrdersFile()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                             </svg>
+                            تحميل ملف الطلبات
                         </button>
                     </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">العميل</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">نوع الخدمة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الميزانية</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table" class="bg-white divide-y divide-gray-200">
+                                <!-- Orders will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Management Section -->
+            <div id="portfolio-section" class="dashboard-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة الأعمال</h2>
+                        <button onclick="showAddWorkModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            ➕ إضافة عمل جديد
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+                        <!-- Portfolio items will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Management Section -->
+            <div id="users-section" class="dashboard-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">إدارة المستخدمين</h2>
+                        <button onclick="showAddUserModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            ➕ إضافة مستخدم جديد
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">اسم المستخدم</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الرتبة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">تاريخ الإنشاء</th>
+                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table" class="bg-white divide-y divide-gray-200">
+                                <!-- Users will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div id="analytics-section" class="dashboard-section hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100">
+                                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">إجمالي الطلبات</p>
+                                <p class="text-2xl font-semibold text-gray-900" id="total-orders">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100">
+                                <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">مكتملة</p>
+                                <p class="text-2xl font-semibold text-gray-900" id="completed-orders">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100">
+                                <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">قيد المراجعة</p>
+                                <p class="text-2xl font-semibold text-gray-900" id="pending-orders">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-red-100">
+                                <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                </svg>
+                            </div>
+                            <div class="mr-4">
+                                <p class="text-sm font-medium text-gray-600">مرفوضة</p>
+                                <p class="text-2xl font-semibold text-gray-900" id="rejected-orders">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">إضافة مستخدم جديد</h2>
+            
+            <form id="add-user-form" class="space-y-6">
+                <div>
+                    <label for="new-username" class="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
+                    <input type="text" id="new-username" name="new-username" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
                 </div>
                 
-                <div id="invoice-content" class="invoice-page p-8">
-                    <!-- Invoice content will be populated here -->
+                <div>
+                    <label for="new-email" class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                    <input type="email" id="new-email" name="new-email" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
+                           placeholder="example@gmail.com">
                 </div>
                 
-                <!-- Payment Methods -->
-                <div class="mt-6 p-6 bg-gray-50 rounded-xl">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">طرق الدفع المتاحة</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button onclick="processPayment('mada')" class="bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition duration-300 flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h20v12z"/>
-                            </svg>
-                            مدى
-                        </button>
-                        <button onclick="processPayment('stc')" class="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600 transition duration-300 flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                            STC Pay
-                        </button>
-                        <button onclick="processPayment('apple')" class="bg-black text-white p-3 rounded-lg hover:bg-gray-800 transition duration-300 flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                            </svg>
-                            Apple Pay
-                        </button>
-                        <button onclick="processPayment('paypal')" class="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.26-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.926-.79l.038-.212.724-4.583.046-.25a.926.926 0 0 1 .926-.79h.584c3.74 0 6.667-1.518 7.52-5.91.356-1.83.172-3.36-.648-4.54z"/>
-                            </svg>
-                            PayPal
-                        </button>
-                    </div>
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
+                    <input type="password" id="new-password" name="new-password" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
                 </div>
-            </div>
+                
+                <div>
+                    <label for="user-role" class="block text-sm font-medium text-gray-700 mb-2">الرتبة</label>
+                    <select id="user-role" name="user-role" required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                        <option value="">اختر الرتبة</option>
+                        <option value="admin_basic">إداري أساسي</option>
+                        <option value="admin_trial">إداري تحت التجربة</option>
+                        <option value="support_senior">مسؤول دعم أول</option>
+                        <option value="support">مسؤول دعم فني</option>
+                        <option value="marketing">مسؤول تسويق</option>
+                    </select>
+                </div>
+                
+                <div id="add-user-error" class="hidden text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg"></div>
+                
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 shadow-lg">
+                        إضافة المستخدم
+                    </button>
+                    <button type="button" onclick="hideAddUserModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <!-- Profile Modal (same as before but with additional fields) -->
+    <!-- Add Work Modal -->
+    <div id="add-work-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">إضافة عمل جديد</h2>
+            
+            <form id="add-work-form" class="space-y-6">
+                <div>
+                    <label for="work-title" class="block text-sm font-medium text-gray-700 mb-2">عنوان العمل</label>
+                    <input type="text" id="work-title" name="work-title" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                </div>
+                
+                <div>
+                    <label for="work-category" class="block text-sm font-medium text-gray-700 mb-2">فئة العمل</label>
+                    <select id="work-category" name="work-category" required 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
+                        <option value="">اختر الفئة</option>
+                        <option value="هوية بصرية">هوية بصرية</option>
+                        <option value="موقع ويب">موقع ويب</option>
+                        <option value="مطبوعات">مطبوعات</option>
+                        <option value="تصميم رقمي">تصميم رقمي</option>
+                        <option value="حملة إعلانية">حملة إعلانية</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="work-description" class="block text-sm font-medium text-gray-700 mb-2">وصف العمل</label>
+                    <textarea id="work-description" name="work-description" rows="3" required 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300 resize-none"></textarea>
+                </div>
+                
+                <div>
+                    <label for="work-image" class="block text-sm font-medium text-gray-700 mb-2">رابط الصورة (اختياري)</label>
+                    <input type="url" id="work-image" name="work-image" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
+                           placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 shadow-lg">
+                        إضافة العمل
+                    </button>
+                    <button type="button" onclick="hideAddWorkModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
+                        إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Edit Modal -->
     <div id="profile-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
         <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="text-center mb-6">
@@ -922,6 +888,28 @@
                                    placeholder="https://example.com/profile.jpg"
                                    onchange="updateProfilePreview()">
                         </div>
+                    </div>
+                </div>
+
+                <!-- Banner Section -->
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z"/>
+                        </svg>
+                        البنر الشخصي (1920x1080)
+                    </h3>
+                    <div class="mb-4">
+                        <div id="banner-preview" class="w-full h-32 bg-gradient-to-r from-primary to-primary-light rounded-lg flex items-center justify-center text-white font-semibold shadow-lg">
+                            معاينة البنر
+                        </div>
+                    </div>
+                    <div>
+                        <label for="profile-banner" class="block text-sm font-medium text-gray-700 mb-2">رابط البنر (مقاس 1920x1080)</label>
+                        <input type="url" id="profile-banner" name="profile-banner" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
+                               placeholder="https://example.com/banner.jpg"
+                               onchange="updateBannerPreview()">
                     </div>
                 </div>
 
@@ -1007,287 +995,816 @@
         </div>
     </div>
 
-    <!-- Dashboard (Admin Panel) -->
-    <div id="dashboard" class="fixed inset-0 bg-gray-100 z-50 hidden overflow-y-auto">
-        <!-- Dashboard Header -->
-        <header class="bg-white shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <div class="flex items-center">
-                        <div class="text-2xl font-bold text-primary">لوحة التحكم | iTrx</div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-gray-700">مرحباً، <span id="current-user">iTrx7</span> <span id="current-user-rank" class="text-primary font-semibold"></span></span>
-                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition duration-300">
-                            تسجيل الخروج
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <script>
+        // System Data with localStorage persistence
+        let users = JSON.parse(localStorage.getItem('itrx_users')) || {
+            'iTrx7': {
+                password: 'iTrx1948@',
+                email: 'itrx70@gmail.com',
+                role: 'super_admin',
+                rank: 'مدير عام',
+                permissions: ['orders', 'portfolio', 'users', 'analytics'],
+                created: '2025-01-01',
+                profile: {
+                    name: 'مجيد iTrx',
+                    avatar: '',
+                    banner: '',
+                    phone: '',
+                    location: '',
+                    bio: ''
+                }
+            }
+        };
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Dashboard Navigation -->
-            <div class="bg-white rounded-2xl shadow-lg mb-8">
-                <div class="p-6">
-                    <div class="flex flex-wrap gap-4" id="dashboard-nav">
-                        <button onclick="showDashboardSection('orders')" class="dashboard-nav-btn bg-primary text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
-                            📋 الطلبات
-                        </button>
-                        <button onclick="showDashboardSection('invoices')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
-                            🧾 الفواتير
-                        </button>
-                        <button onclick="showDashboardSection('portfolio')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
-                            🎨 إدارة الأعمال
-                        </button>
-                        <button onclick="showDashboardSection('users')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
-                            👥 إدارة المستخدمين
-                        </button>
-                        <button onclick="showDashboardSection('analytics')" class="dashboard-nav-btn bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">
-                            📊 التحليلات
-                        </button>
-                    </div>
-                </div>
-            </div>
+        let orders = JSON.parse(localStorage.getItem('itrx_orders')) || [];
+        let portfolioItems = JSON.parse(localStorage.getItem('itrx_portfolio')) || [];
+        let currentUser = null;
+        let currentUserRole = null;
 
-            <!-- Orders Section -->
-            <div id="orders-section" class="dashboard-section">
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">إدارة الطلبات</h2>
-                        <button onclick="generateOrdersFile()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                            </svg>
-                            تحميل ملف الطلبات
-                        </button>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full table-auto">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">العميل</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">نوع الخدمة</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الميزانية</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
-                                </tr>
-                            </thead>
-                            <tbody id="orders-table" class="bg-white divide-y divide-gray-200">
-                                <!-- Orders will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('itrx_users', JSON.stringify(users));
+            localStorage.setItem('itrx_orders', JSON.stringify(orders));
+            localStorage.setItem('itrx_portfolio', JSON.stringify(portfolioItems));
+        }
 
-            <!-- Invoices Section -->
-            <div id="invoices-section" class="dashboard-section hidden">
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">إدارة الفواتير</h2>
-                        <div class="flex gap-2">
-                            <input type="text" id="invoice-search" placeholder="البحث في الفواتير..." 
-                                   class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                                   onkeyup="searchInvoices()">
-                            <button onclick="searchInvoices()" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition duration-300">
-                                بحث
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full table-auto">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">رقم الفاتورة</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">العميل</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">المبلغ</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">حالة الدفع</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التاريخ</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
-                                </tr>
-                            </thead>
-                            <tbody id="invoices-table" class="bg-white divide-y divide-gray-200">
-                                <!-- Invoices will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Other dashboard sections remain the same -->
-            <!-- Portfolio Management Section -->
-            <div id="portfolio-section" class="dashboard-section hidden">
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">إدارة الأعمال</h2>
-                        <button onclick="showAddWorkModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
-                            ➕ إضافة عمل جديد
-                        </button>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
-                        <!-- Portfolio items will be populated here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Users Management Section -->
-            <div id="users-section" class="dashboard-section hidden">
-                <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900">إدارة المستخدمين</h2>
-                        <div class="flex gap-2">
-                            <button onclick="showAddUserModal()" class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
-                                ➕ إضافة مستخدم جديد
-                            </button>
-                            <button onclick="showDesignerOfMonthModal()" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
-                                🏅 تغيير مصمم الشهر
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full table-auto">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">اسم المستخدم</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">البريد الإلكتروني</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الرتبة</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">التقييم</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الحالة</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">الإجراءات</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table" class="bg-white divide-y divide-gray-200">
-                                <!-- Users will be populated here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Section -->
-            <div id="analytics-section" class="dashboard-section hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-blue-100">
-                                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">إجمالي الطلبات</p>
-                                <p class="text-2xl font-semibold text-gray-900" id="total-orders">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-green-100">
-                                <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
-                                </svg>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">مكتملة</p>
-                                <p class="text-2xl font-semibold text-gray-900" id="completed-orders">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-yellow-100">
-                                <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                </svg>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">قيد المراجعة</p>
-                                <p class="text-2xl font-semibold text-gray-900" id="pending-orders">0</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-purple-100">
-                                <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                                </svg>
-                            </div>
-                            <div class="mr-4">
-                                <p class="text-sm font-medium text-gray-600">إجمالي الإيرادات</p>
-                                <p class="text-2xl font-semibold text-gray-900" id="total-revenue">0 ريال</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Additional Modals -->
-    <!-- Add User Modal -->
-    <div id="add-user-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">إضافة مستخدم جديد</h2>
+        // Generate and download iTrxOrders.txt file
+        function generateOrdersFile() {
+            if (orders.length === 0) return;
             
-            <form id="add-user-form" class="space-y-6">
-                <div>
-                    <label for="new-username" class="block text-sm font-medium text-gray-700 mb-2">اسم المستخدم</label>
-                    <input type="text" id="new-username" name="new-username" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
-                </div>
-                
-                <div>
-                    <label for="new-email" class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
-                    <input type="email" id="new-email" name="new-email" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300"
-                           placeholder="example@gmail.com">
-                </div>
-                
-                <div>
-                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-2">كلمة المرور</label>
-                    <input type="password" id="new-password" name="new-password" required 
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
-                </div>
-                
-                <div>
-                    <label for="user-role" class="block text-sm font-medium text-gray-700 mb-2">الرتبة</label>
-                    <select id="user-role" name="user-role" required 
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300">
-                        <option value="">اختر الرتبة</option>
-                        <option value="admin_basic">إداري أساسي</option>
-                        <option value="admin_trial">إداري تحت التجربة</option>
-                        <option value="support_senior">مسؤول دعم أول</option>
-                        <option value="support">مسؤول دعم فني</option>
-                        <option value="marketing">مسؤول تسويق</option>
-                    </select>
-                </div>
-                
-                <div id="add-user-error" class="hidden text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg"></div>
-                
-                <div class="flex gap-4">
-                    <button type="submit" class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 shadow-lg">
-                        إضافة المستخدم
-                    </button>
-                    <button type="button" onclick="hideAddUserModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition duration-300">
-                        إلغاء
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+            let fileContent = "=== ملف طلبات iTrx - تم إنشاؤه تلقائياً ===\n";
+            fileContent += `تاريخ الإنشاء: ${new Date().toLocaleString('ar-SA')}\n`;
+            fileContent += `إجمالي الطلبات: ${orders.length}\n`;
+            fileContent += "=" + "=".repeat(50) + "\n\n";
+            
+            orders.forEach((order, index) => {
+                fileContent += `رقم الطلب: ${index + 1}\n`;
+                fileContent += `الاسم: ${order.clientName}\n`;
+                fileContent += `البريد الإلكتروني: ${order.clientEmail}\n`;
+                fileContent += `نوع الخدمة: ${order.service}\n`;
+                fileContent += `الميزانية: ${order.budget}\n`;
+                fileContent += `الحالة: ${order.status}\n`;
+                fileContent += `تاريخ الطلب: ${order.date}\n`;
+                fileContent += `تفاصيل الطلب:\n${order.description}\n`;
+                fileContent += "-".repeat(50) + "\n\n";
+            });
+            
+            // Add statistics
+            const completedCount = orders.filter(o => o.status === 'مكتمل').length;
+            const pendingCount = orders.filter(o => o.status === 'قيد المراجعة').length;
+            const acceptedCount = orders.filter(o => o.status === 'مقبول').length;
+            const rejectedCount = orders.filter(o => o.status === 'مرفوض').length;
+            
+            fileContent += "=== إحصائيات الطلبات ===\n";
+            fileContent += `الطلبات المكتملة: ${completedCount}\n`;
+            fileContent += `الطلبات المقبولة: ${acceptedCount}\n`;
+            fileContent += `الطلبات قيد المراجعة: ${pendingCount}\n`;
+            fileContent += `الطلبات المرفوضة: ${rejectedCount}\n`;
+            fileContent += "=" + "=".repeat(30) + "\n";
+            
+            // Create and download file
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'iTrxOrders.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
 
-    <!-- Add Work Modal -->
-    <div id="add-work-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center">
-        <div class<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96879eb583ba97d8',t:'MTc1NDA3NTI2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+        const roleHierarchy = {
+            'super_admin': { rank: 'مدير عام', level: 1, color: 'bg-purple-100 text-purple-800' },
+            'admin_basic': { rank: 'إداري أساسي', level: 2, color: 'bg-blue-100 text-blue-800' },
+            'admin_trial': { rank: 'إداري تحت التجربة', level: 3, color: 'bg-gray-100 text-gray-800' },
+            'support_senior': { rank: 'مسؤول دعم أول', level: 4, color: 'bg-green-100 text-green-800' },
+            'support': { rank: 'مسؤول دعم فني', level: 5, color: 'bg-indigo-100 text-indigo-800' },
+            'marketing': { rank: 'مسؤول تسويق', level: 6, color: 'bg-orange-100 text-orange-800' },
+            'user': { rank: 'مستخدم', level: 7, color: 'bg-gray-100 text-gray-600' }
+        };
+
+        const rolePermissions = {
+            'super_admin': ['orders', 'portfolio', 'users', 'analytics'],
+            'admin_basic': ['orders', 'portfolio', 'analytics'],
+            'admin_trial': ['orders', 'portfolio'],
+            'support_senior': ['orders', 'analytics'],
+            'support': ['orders'],
+            'marketing': ['orders', 'analytics'],
+            'user': []
+        };
+
+        // Modal Functions
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function hideLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('login-form').reset();
+        }
+
+        function showRegisterModal() {
+            document.getElementById('register-modal').classList.remove('hidden');
+        }
+
+        function hideRegisterModal() {
+            document.getElementById('register-modal').classList.add('hidden');
+            document.getElementById('register-error').classList.add('hidden');
+            document.getElementById('register-form').reset();
+        }
+
+        function showOrderModal() {
+            if (!currentUser) {
+                alert('يجب تسجيل الدخول أولاً');
+                return;
+            }
+            
+            if (users[currentUser].role !== 'user') {
+                alert('يمكن للمستخدمين العاديين فقط تقديم طلبات التصميم');
+                return;
+            }
+            
+            document.getElementById('order-modal').classList.remove('hidden');
+        }
+
+        function hideOrderModal() {
+            document.getElementById('order-modal').classList.add('hidden');
+            document.getElementById('order-error').classList.add('hidden');
+            document.getElementById('order-form').reset();
+        }
+
+        function showAddUserModal() {
+            document.getElementById('add-user-modal').classList.remove('hidden');
+        }
+
+        function hideAddUserModal() {
+            document.getElementById('add-user-modal').classList.add('hidden');
+            document.getElementById('add-user-error').classList.add('hidden');
+            document.getElementById('add-user-form').reset();
+        }
+
+        function showAddWorkModal() {
+            document.getElementById('add-work-modal').classList.remove('hidden');
+        }
+
+        function hideAddWorkModal() {
+            document.getElementById('add-work-modal').classList.add('hidden');
+            document.getElementById('add-work-form').reset();
+        }
+
+        function showProfileModal() {
+            if (!currentUser) return;
+            
+            const user = users[currentUser];
+            const profile = user.profile || {};
+            
+            // Populate form with current data
+            document.getElementById('profile-name').value = profile.name || currentUser;
+            document.getElementById('profile-email').value = user.email;
+            document.getElementById('profile-picture').value = profile.avatar || '';
+            document.getElementById('profile-banner').value = profile.banner || '';
+            document.getElementById('profile-phone').value = profile.phone || '';
+            document.getElementById('profile-location').value = profile.location || '';
+            document.getElementById('profile-bio').value = profile.bio || '';
+            
+            // Update previews
+            updateProfilePreview();
+            updateBannerPreview();
+            
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+
+        function hideProfileModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+            document.getElementById('profile-error').classList.add('hidden');
+            document.getElementById('profile-success').classList.add('hidden');
+            document.getElementById('profile-form').reset();
+        }
+
+        function updateProfilePreview() {
+            const avatarUrl = document.getElementById('profile-picture').value;
+            const preview = document.getElementById('profile-preview');
+            
+            if (avatarUrl) {
+                preview.src = avatarUrl;
+                preview.onerror = function() {
+                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%23FF5500'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E";
+                };
+            } else {
+                preview.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%23FF5500'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E";
+            }
+        }
+
+        function updateBannerPreview() {
+            const bannerUrl = document.getElementById('profile-banner').value;
+            const preview = document.getElementById('banner-preview');
+            
+            if (bannerUrl) {
+                preview.style.backgroundImage = `url(${bannerUrl})`;
+                preview.style.backgroundSize = 'cover';
+                preview.style.backgroundPosition = 'center';
+                preview.textContent = '';
+                
+                // Test if image loads
+                const img = new Image();
+                img.onload = function() {
+                    preview.style.backgroundImage = `url(${bannerUrl})`;
+                };
+                img.onerror = function() {
+                    preview.style.backgroundImage = '';
+                    preview.style.background = 'linear-gradient(to right, #FF5500, #FF7733)';
+                    preview.textContent = 'معاينة البنر';
+                };
+                img.src = bannerUrl;
+            } else {
+                preview.style.backgroundImage = '';
+                preview.style.background = 'linear-gradient(to right, #FF5500, #FF7733)';
+                preview.textContent = 'معاينة البنر';
+            }
+        }
+
+        function updateUserProfile() {
+            if (!currentUser) return;
+            
+            const user = users[currentUser];
+            const profile = user.profile || {};
+            
+            // Update profile section
+            document.getElementById('profile-username').textContent = profile.name || currentUser;
+            document.getElementById('profile-rank').textContent = roleHierarchy[user.role].rank;
+            
+            // Update avatar
+            const avatar = document.getElementById('user-avatar');
+            if (profile.avatar) {
+                avatar.src = profile.avatar;
+                avatar.onerror = function() {
+                    this.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%23FF5500'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E";
+                };
+            }
+            
+            // Show/hide order button based on role
+            const orderBtn = document.getElementById('order-btn');
+            if (user.role === 'user') {
+                orderBtn.style.display = 'flex';
+            } else {
+                orderBtn.style.display = 'none';
+            }
+        }
+
+        // Dashboard Functions
+        function showDashboard() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateDashboardNav();
+            showDashboardSection('orders');
+            loadOrders();
+            loadUsers();
+            loadPortfolio();
+            updateAnalytics();
+        }
+
+        function hideDashboard() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function logout() {
+            currentUser = null;
+            currentUserRole = null;
+            hideDashboard();
+            
+            // Show login section, hide profile section
+            document.getElementById('login-section').classList.remove('hidden');
+            document.getElementById('user-profile-section').classList.add('hidden');
+        }
+
+        function updateDashboardNav() {
+            const navContainer = document.getElementById('dashboard-nav');
+            const userPermissions = users[currentUser].permissions;
+            
+            navContainer.querySelectorAll('.dashboard-nav-btn').forEach(btn => {
+                const section = btn.onclick.toString().match(/'(\w+)'/)[1];
+                if (!userPermissions.includes(section)) {
+                    btn.style.display = 'none';
+                } else {
+                    btn.style.display = 'inline-block';
+                }
+            });
+        }
+
+        function showDashboardSection(section) {
+            document.querySelectorAll('.dashboard-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            
+            document.getElementById(section + '-section').classList.remove('hidden');
+            
+            document.querySelectorAll('.dashboard-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('bg-primary', 'text-white');
+        }
+
+        // Order Management
+        function loadOrders() {
+            const ordersTable = document.getElementById('orders-table');
+            ordersTable.innerHTML = '';
+            
+            orders.forEach((order, index) => {
+                const row = document.createElement('tr');
+                const statusColors = {
+                    'قيد المراجعة': 'bg-yellow-100 text-yellow-800',
+                    'مقبول': 'bg-blue-100 text-blue-800',
+                    'مكتمل': 'bg-green-100 text-green-800',
+                    'مرفوض': 'bg-red-100 text-red-800'
+                };
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${order.clientName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${order.clientEmail}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${order.service}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${order.budget}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColors[order.status]}">${order.status}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${order.date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onclick="viewOrder(${index})" class="text-primary hover:text-primary-dark ml-2">عرض</button>
+                        ${order.status === 'قيد المراجعة' ? `
+                            <button onclick="updateOrderStatus(${index}, 'مقبول')" class="text-green-600 hover:text-green-900 ml-2">قبول</button>
+                            <button onclick="updateOrderStatus(${index}, 'مرفوض')" class="text-red-600 hover:text-red-900">رفض</button>
+                        ` : order.status === 'مقبول' ? `
+                            <button onclick="updateOrderStatus(${index}, 'مكتمل')" class="text-blue-600 hover:text-blue-900">إكمال</button>
+                        ` : ''}
+                    </td>
+                `;
+                ordersTable.appendChild(row);
+            });
+        }
+
+        function updateOrderStatus(index, newStatus) {
+            orders[index].status = newStatus;
+            saveData();
+            loadOrders();
+            updateAnalytics();
+        }
+
+        function viewOrder(index) {
+            const order = orders[index];
+            alert(`تفاصيل الطلب:\n\nالعميل: ${order.clientName}\nالبريد: ${order.clientEmail}\nالخدمة: ${order.service}\nالوصف: ${order.description}\nالميزانية: ${order.budget}\nالحالة: ${order.status}`);
+        }
+
+        // User Management
+        function loadUsers() {
+            const usersTable = document.getElementById('users-table');
+            usersTable.innerHTML = '';
+            
+            // Sort users by hierarchy level
+            const sortedUsers = Object.entries(users).sort((a, b) => {
+                return roleHierarchy[a[1].role].level - roleHierarchy[b[1].role].level;
+            });
+            
+            sortedUsers.forEach(([username, userData]) => {
+                const row = document.createElement('tr');
+                const roleInfo = roleHierarchy[userData.role];
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        ${username} <span class="text-primary font-semibold">(${roleInfo.rank})</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${userData.email}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${roleInfo.color}">${roleInfo.rank}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">نشط</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${userData.created}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        ${username === 'iTrx7' ? '<span class="text-gray-400">المدير الأساسي</span>' : `
+                            <button onclick="deleteUser('${username}')" class="text-red-600 hover:text-red-900">حذف</button>
+                        `}
+                    </td>
+                `;
+                usersTable.appendChild(row);
+            });
+        }
+
+        function deleteUser(username) {
+            if (confirm('هل أنت متأكد من حذف هذا المستخدم؟')) {
+                delete users[username];
+                saveData();
+                loadUsers();
+            }
+        }
+
+        // Portfolio Management
+        function loadPortfolio() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            portfolioGrid.innerHTML = '';
+            
+            portfolioItems.forEach((item, index) => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'group relative overflow-hidden rounded-2xl shadow-lg card-hover';
+                
+                const colors = ['from-primary to-primary-light', 'from-green-500 to-green-600', 'from-purple-500 to-purple-600', 'from-blue-500 to-blue-600'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                portfolioItem.innerHTML = `
+                    <div class="aspect-w-4 aspect-h-3 bg-gradient-to-br ${randomColor} p-8 flex items-center justify-center relative">
+                        <button onclick="deletePortfolioItem(${index})" class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-red-600 transition duration-300">
+                            ×
+                        </button>
+                        <div class="text-center text-white">
+                            <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h4 class="text-xl font-semibold">${item.title}</h4>
+                            <p class="text-sm opacity-90">${item.category}</p>
+                        </div>
+                    </div>
+                `;
+                portfolioGrid.appendChild(portfolioItem);
+            });
+            
+            // Add "Add New" button
+            const addButton = document.createElement('div');
+            addButton.className = 'bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300 cursor-pointer hover:border-primary transition duration-300';
+            addButton.onclick = showAddWorkModal;
+            addButton.innerHTML = `
+                <div class="text-center">
+                    <svg class="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <p class="text-gray-500">انقر لإضافة عمل جديد</p>
+                </div>
+            `;
+            portfolioGrid.appendChild(addButton);
+            
+            // Update public portfolio
+            updatePublicPortfolio();
+        }
+
+        function deletePortfolioItem(index) {
+            if (confirm('هل أنت متأكد من حذف هذا العمل؟')) {
+                portfolioItems.splice(index, 1);
+                saveData();
+                loadPortfolio();
+            }
+        }
+
+        function updatePublicPortfolio() {
+            const publicPortfolio = document.getElementById('public-portfolio');
+            const existingItems = publicPortfolio.querySelectorAll('.group');
+            
+            // Keep first 3 default items, add new ones
+            portfolioItems.forEach((item, index) => {
+                if (index >= 3) return; // Limit to show only first 3 additional items
+                
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'group relative overflow-hidden rounded-2xl shadow-lg card-hover';
+                
+                const colors = ['from-primary to-primary-light', 'from-green-500 to-green-600', 'from-purple-500 to-purple-600'];
+                const color = colors[index % colors.length];
+                
+                portfolioItem.innerHTML = `
+                    <div class="aspect-w-4 aspect-h-3 bg-gradient-to-br ${color} p-8 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h4 class="text-xl font-semibold">${item.title}</h4>
+                            <p class="text-sm opacity-90">${item.category}</p>
+                        </div>
+                    </div>
+                `;
+                publicPortfolio.appendChild(portfolioItem);
+            });
+        }
+
+        // Analytics
+        function updateAnalytics() {
+            const totalOrders = orders.length;
+            const completedOrders = orders.filter(order => order.status === 'مكتمل').length;
+            const pendingOrders = orders.filter(order => order.status === 'قيد المراجعة').length;
+            const rejectedOrders = orders.filter(order => order.status === 'مرفوض').length;
+            
+            document.getElementById('total-orders').textContent = totalOrders;
+            document.getElementById('completed-orders').textContent = completedOrders;
+            document.getElementById('pending-orders').textContent = pendingOrders;
+            document.getElementById('rejected-orders').textContent = rejectedOrders;
+        }
+
+        // Event Listeners
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('login-error');
+            
+            // Check if login is by email
+            let foundUser = null;
+            for (let [user, data] of Object.entries(users)) {
+                if ((user === username || data.email === username) && data.password === password) {
+                    foundUser = user;
+                    break;
+                }
+            }
+            
+            if (foundUser) {
+                currentUser = foundUser;
+                currentUserRole = users[foundUser].role;
+                document.getElementById('current-user').textContent = foundUser;
+                document.getElementById('current-user-rank').textContent = `(${roleHierarchy[currentUserRole].rank})`;
+                
+                hideLoginModal();
+                
+                // Hide login section, show profile section
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('user-profile-section').classList.remove('hidden');
+                
+                // Update user profile display
+                updateUserProfile();
+                
+                // Show dashboard only for admin/staff users
+                if (currentUserRole !== 'user') {
+                    showDashboard();
+                }
+            } else {
+                errorDiv.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+                errorDiv.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const errorDiv = document.getElementById('register-error');
+            
+            // Validate email format
+            if (!email.endsWith('@gmail.com')) {
+                errorDiv.textContent = 'يجب أن يكون البريد الإلكتروني من Gmail (@gmail.com)';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // Check if email already exists
+            for (let userData of Object.values(users)) {
+                if (userData.email === email) {
+                    errorDiv.textContent = 'البريد الإلكتروني مستخدم بالفعل';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+            }
+            
+            // Create new user
+            const username = email.split('@')[0]; // Use email prefix as username
+            users[username] = {
+                password: password,
+                email: email,
+                role: 'user',
+                rank: 'مستخدم',
+                permissions: [],
+                created: new Date().toISOString().split('T')[0],
+                profile: {
+                    name: name,
+                    avatar: '',
+                    banner: '',
+                    phone: '',
+                    location: '',
+                    bio: ''
+                }
+            };
+            
+            saveData();
+            hideRegisterModal();
+            alert('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول');
+        });
+
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentUser || users[currentUser].role !== 'user') {
+                document.getElementById('order-error').textContent = 'يجب تسجيل الدخول كمستخدم عادي لتقديم طلب';
+                document.getElementById('order-error').classList.remove('hidden');
+                return;
+            }
+            
+            const service = document.getElementById('order-service').value;
+            const description = document.getElementById('order-description').value;
+            const budget = document.getElementById('order-budget').value;
+            
+            const newOrder = {
+                clientName: currentUser,
+                clientEmail: users[currentUser].email,
+                service: service,
+                description: description,
+                budget: budget,
+                status: 'قيد المراجعة',
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            orders.push(newOrder);
+            saveData();
+            hideOrderModal();
+            alert('تم إرسال طلبك بنجاح! سيتم مراجعته قريباً');
+        });
+
+        document.getElementById('add-user-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('new-username').value;
+            const email = document.getElementById('new-email').value;
+            const password = document.getElementById('new-password').value;
+            const role = document.getElementById('user-role').value;
+            const errorDiv = document.getElementById('add-user-error');
+            
+            // Validate email format
+            if (!email.endsWith('@gmail.com')) {
+                errorDiv.textContent = 'يجب أن يكون البريد الإلكتروني من Gmail (@gmail.com)';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            if (users[username]) {
+                errorDiv.textContent = 'اسم المستخدم موجود بالفعل';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            // Check if email already exists
+            for (let userData of Object.values(users)) {
+                if (userData.email === email) {
+                    errorDiv.textContent = 'البريد الإلكتروني مستخدم بالفعل';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+            }
+            
+            users[username] = {
+                password: password,
+                email: email,
+                role: role,
+                rank: roleHierarchy[role].rank,
+                permissions: rolePermissions[role],
+                created: new Date().toISOString().split('T')[0],
+                profile: {
+                    name: username,
+                    avatar: '',
+                    banner: '',
+                    phone: '',
+                    location: '',
+                    bio: ''
+                }
+            };
+            
+            saveData();
+            loadUsers();
+            hideAddUserModal();
+            alert('تم إضافة المستخدم بنجاح');
+        });
+
+        document.getElementById('add-work-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('work-title').value;
+            const category = document.getElementById('work-category').value;
+            const description = document.getElementById('work-description').value;
+            const image = document.getElementById('work-image').value;
+            
+            const newWork = {
+                title: title,
+                category: category,
+                description: description,
+                image: image,
+                date: new Date().toISOString().split('T')[0]
+            };
+            
+            portfolioItems.push(newWork);
+            saveData();
+            loadPortfolio();
+            hideAddWorkModal();
+            alert('تم إضافة العمل بنجاح');
+        });
+
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+            
+            const name = document.getElementById('profile-name').value;
+            const avatar = document.getElementById('profile-picture').value;
+            const banner = document.getElementById('profile-banner').value;
+            const phone = document.getElementById('profile-phone').value;
+            const location = document.getElementById('profile-location').value;
+            const bio = document.getElementById('profile-bio').value;
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            
+            const errorDiv = document.getElementById('profile-error');
+            const successDiv = document.getElementById('profile-success');
+            
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+            
+            // Validate password change if provided
+            if (currentPassword || newPassword) {
+                if (!currentPassword || !newPassword) {
+                    errorDiv.textContent = 'يجب إدخال كلمة المرور الحالية والجديدة معاً';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+                
+                if (users[currentUser].password !== currentPassword) {
+                    errorDiv.textContent = 'كلمة المرور الحالية غير صحيحة';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+                
+                // Update password
+                users[currentUser].password = newPassword;
+            }
+            
+            // Initialize profile if doesn't exist
+            if (!users[currentUser].profile) {
+                users[currentUser].profile = {};
+            }
+            
+            // Update profile data
+            users[currentUser].profile.name = name;
+            users[currentUser].profile.avatar = avatar;
+            users[currentUser].profile.banner = banner;
+            users[currentUser].profile.phone = phone;
+            users[currentUser].profile.location = location;
+            users[currentUser].profile.bio = bio;
+            
+            saveData();
+            updateUserProfile();
+            
+            successDiv.textContent = 'تم حفظ التغييرات بنجاح!';
+            successDiv.classList.remove('hidden');
+            
+            // Clear password fields
+            document.getElementById('current-password').value = '';
+            document.getElementById('new-password').value = '';
+            
+            setTimeout(() => {
+                hideProfileModal();
+            }, 1500);
+        });
+
+        // Close modals when clicking outside
+        document.querySelectorAll('[id$="-modal"]').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const navHeight = 64;
+            const elementPosition = element.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add smooth scrolling to all navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAnalytics();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9687aa6b16f39846',t:'MTc1NDA3NTc0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
